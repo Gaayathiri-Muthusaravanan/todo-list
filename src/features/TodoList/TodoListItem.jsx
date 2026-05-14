@@ -27,7 +27,7 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}){
                     (<>
                         <TextInputWithLabel value = {workingTitle} onChange={handleEdit}/>
                         <button type="button" onClick={handleCancel}> Cancel </button>
-                        <button type="button" onClick={handleUpdate} disabled={isValidTodoTitle(workingTitle)}> Update </button>
+                        <button type="button" onClick={handleUpdate} disabled={!isValidTodoTitle(workingTitle)}> Update </button>
                     </>) 
                     :
                     (<>
