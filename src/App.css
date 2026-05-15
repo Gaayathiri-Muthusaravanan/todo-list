@@ -1,0 +1,25 @@
+
+#appContainer{
+    max-width: 1400px;
+    margin: 50px auto;
+   
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    font-family: Arial, sans-serif;
+    min-height: 85vh;
+}
+#appHeading{
+   
+    
+    text-align: center;
+    padding: 20px;
+   
+
+}
+#appContainer>div{
+    margin-bottom: 50px;
+}

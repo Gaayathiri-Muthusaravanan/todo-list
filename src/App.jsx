@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import './App.css';
 
 import TodoList from './features/TodoList/TodoList';
 import TodoForm from './features/TodoForm';
@@ -39,10 +39,10 @@ function App() {
     
  
   return (
-    <div>
-      <h1>ToDo List</h1>
-      <TodoForm onAddTodo = {addTodo}/>
-      <TodoList todoList={todoList} onCompleteTodo ={completeTodo} onUpdateTodo = {updateTodo}/>
+    <div id="appContainer">
+      <div><h1 id = "appHeading">TODO LIST</h1></div>
+      <div><TodoForm onAddTodo = {addTodo}/></div>
+      <div><TodoList todoList={todoList} onCompleteTodo ={completeTodo} onUpdateTodo = {updateTodo}/></div>
     </div>
   );
 }

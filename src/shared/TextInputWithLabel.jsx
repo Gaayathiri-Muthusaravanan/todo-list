@@ -1,3 +1,4 @@
+import '../App.css';
 function TextInputWithLabel({elementId,labelText,onChange,ref,value}){
     return(
         <>
@@ -8,6 +9,7 @@ function TextInputWithLabel({elementId,labelText,onChange,ref,value}){
                 ref = {ref}
                 value = {value}
                 onChange={onChange}
+                className="todoInput"
             />
         </>
     );
