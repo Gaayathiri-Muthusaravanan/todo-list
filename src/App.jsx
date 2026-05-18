@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-
+import todoImg from './assets/todo.jpeg'
 import TodoList from './features/TodoList/TodoList';
 import TodoForm from './features/TodoForm';
 
@@ -40,7 +40,10 @@ function App() {
  
   return (
     <div id="appContainer">
-      <div><h1 id = "appHeading">TODO LIST</h1></div>
+      <div id = "appHeading">
+        <img src={todoImg} id ="todoImage" alt="todo" />
+        <h1>TO-DO LIST</h1>
+      </div>
       <div><TodoForm onAddTodo = {addTodo}/></div>
       <div><TodoList todoList={todoList} onCompleteTodo ={completeTodo} onUpdateTodo = {updateTodo}/></div>
     </div>

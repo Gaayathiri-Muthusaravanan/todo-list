@@ -1,4 +1,5 @@
 import { useState } from "react";
+import '../../App.css'
 import TextInputWithLabel from "../../shared/TextInputWithLabel";
 import { isValidTodoTitle } from "../../utils/todoValidation";
 import { useEditableTitle } from "../../hooks/useEditableTitle";
@@ -28,7 +29,7 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}){
         
     }
     return(
-        <li>
+        <li id = "listTodo">
             <form onSubmit={handleUpdate}>
                 { isEditing ? 
                     (<>
@@ -37,11 +38,11 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}){
                             onChange={handleEdit} 
                             labelText = "Todo"
                             elementId={`editTitle${todo.id}`}/>
-                        <button type="button" onClick={handleCancel}> Cancel </button>
-                        <button type="button" onClick={handleUpdate} disabled={!isValidTodoTitle(workingTitle)}> Update </button>
+                        <button type="button" id = "cancelButton" onClick={handleCancel}> Cancel </button>
+                        <button type="button" id = "updateButton" onClick={handleUpdate} disabled={!isValidTodoTitle(workingTitle)}> Update </button>
                     </>) 
                     :
-                    (<>
+                    (<div className="checkbox-wrapper">
                         <label>
                             <input
                                 type="checkbox"
@@ -51,7 +52,7 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}){
                             />
                         </label>
                         <span onClick={startEditing}>{todo.title}</span>
-                    </>
+                    </div>
                     )
                 }
                 

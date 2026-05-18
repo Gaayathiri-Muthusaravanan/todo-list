@@ -2,24 +2,104 @@
 #appContainer{
     max-width: 1400px;
     margin: 50px auto;
-   
+    
     display:flex;
     flex-direction: column;
     align-items: center;
-    background: #ffffff;
+    background:#f2f5f4;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     font-family: Arial, sans-serif;
     min-height: 85vh;
 }
 #appHeading{
-   
-    
-    text-align: center;
+    color: white;
+    background-color: #122037;
+    display: flex;
+
+    justify-content: center;
     padding: 20px;
+    width: 97%;
+   
    
 
 }
 #appContainer>div{
     margin-bottom: 50px;
+}
+#listTodo{
+    
+    border-style: none;
+    list-style: none;
+    padding: 25px;
+    width: 800px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    font-size: large;
+    background-color: white;
+    color: black;
+    
+}
+.todoInput{
+    font-size: large;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px 20px;
+   
+}
+#updateButton{
+    background-color: #2a7db1;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+#cancelButton{
+    background-color: #c02d2d;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+#addTodoButton{
+     background-color:#137752;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+#todoImage{
+    width: 40px;
+    height: 60px;
+    margin-right: 50px;
+}
+#todoPara{
+    font-size: 1.8rem;
+}
+.checkbox-wrapper{
+    display: flex;
+    flex-direction: row;
+    gap:20px;   
+    font-size: 1.5rem; 
+}
+label{
+    font-size: x-large;
 }
