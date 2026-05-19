@@ -1,5 +1,5 @@
 import TodoListItem from "./TodoListItem";
-import '../../App.css';
+
 function TodoList({todoList, onCompleteTodo, onUpdateTodo}){
     const filteredTodoList = todoList.filter((todo)=>!todo.isCompleted);
 
