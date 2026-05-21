@@ -36,9 +36,8 @@ useEffect(()=>{
   fetchTodos();
 },[token]);
 
-
 //Add Todo
-    const addTodo = async(todoTitle) => {
+const addTodo = async(todoTitle) => {
     const tempTodo = {
       id: Date.now(),
       title: todoTitle,
@@ -54,20 +53,21 @@ useEffect(()=>{
           isCompleted: false
         }),
         headers: {
-        'Content-Type' : 'application/json',
-        'X-CSRF-TOKEN' : token
+          'Content-Type' : 'application/json',
+          'X-CSRF-TOKEN' : token
         },
         credentials: 'include'
-        })
-      if(!response.ok){
-        throw new Error("Failed to add todo");
-      }
-    }catch(error){
+      })
       const realTodo = await response.json();
-      console.log(realTodo);
-      setTodoList(previous=>
-        previous.map((todo)=>
-      todo.id=== tempTodo.id? realTodo:todo));
+      setTodoList((previous)=>
+        previous.map((todo)=> 
+          todo.id===tempTodo.id? realTodo: todo
+      ));
+    }catch(error){
+       setTodoList(previous =>
+      previous.filter(todo => todo.id !== tempTodo.id)
+    );
+      setError(error);
     }
     
   };
@@ -76,17 +76,15 @@ useEffect(()=>{
   //Complete Todo
 
     const completeTodo = async(id) => {
-      const updatedTodo = todoList.map((todo) =>
-      {
-        if(todo.id === id){
-          return {...todo,isCompleted:true};
-        }
-        return todo;
-      });
-      
+      const originalTodo = todoList.find(todo => todo.id === id);
+       const updatedTodos = todoList.map(todo =>
+      todo.id === id
+        ? { ...todo, isCompleted: true }
+        : todo
+    );
       setTodoList(updatedTodo);
       try{
-        const response = await fetch("/api/tasks/${id}",{
+        const response = await fetch(`/api/tasks/${id}`,{
           method: 'PATCH',
           body : JSON.stringify({
             isCompleted: true
@@ -110,7 +108,8 @@ useEffect(()=>{
 
 
 
-    const updateTodo = (editedTodo) =>{
+    const updateTodo = async(editedTodo) =>{
+      const originalTodo = todoList.find(todo => todo.id === editedTodo.id);
       const updatedTodos = todoList.map((todo)=>
       {
         if(todo.id === editedTodo.id){
@@ -119,9 +118,32 @@ useEffect(()=>{
         return todo;
       });
       setTodoList(updatedTodos);
+      try{
+        const response = await fetch(`/api/tasks/${editedTodo.id}`,{
+          method: 'PATCH',
+          body : JSON.stringify({
+             title: editedTodo.title,
+        isCompleted: editedTodo.isCompleted
+          }),
+          headers: {
+            'Content-Type' : 'application/json',
+            'X-CSRF-TOKEN' : token
+          }
+        })
+        if(!response.ok){
+          throw new Error("Failed to complete task");
+        }
+      }catch(error){
+         setTodoList(prev =>
+      prev.map(todo =>
+        todo.id === editedTodo.id ? originalTodo : todo
+      )
+    );
+        setError("Failed to complete todo");
+      }
     }
     return(
-      
+
      <div id="appContainer">
       <div><TodoForm onAddTodo = {addTodo}/></div>
       <div><TodoList todoList={todoList} onCompleteTodo ={completeTodo} onUpdateTodo = {updateTodo}/></div>
