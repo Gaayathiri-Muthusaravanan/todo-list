@@ -1,6 +1,13 @@
+import '../App.css'
+import todoImg from '../assets/todo.jpeg'
 function Header(){
     return(
-        <h1>Todo List</h1>
+        <div id = "appHeading">
+            <img id = "todoImage" src = {todoImg} alt="image" />
+            <h1>TO-DO LIST</h1>
+           
+        </div>
+        
     )
 }
-export default Header
+export default Header;

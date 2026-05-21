@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import '../App.css'
 function Logon({onSetEmail, onSetToken}){
     const [email, setEmail] = useState("");
     const  [password, setPassword] = useState("");
@@ -17,7 +17,9 @@ function Logon({onSetEmail, onSetToken}){
                 body: JSON.stringify({ email, password })
             });
             const data =await response.json();
+            console.log(data);
             if(response.status === 200 && data.name && data.csrfToken){
+                console.log(data);
                 onSetEmail(data.name);
                 onSetToken(data.csrfToken);
             }
@@ -32,26 +34,32 @@ function Logon({onSetEmail, onSetToken}){
 
     }
     return(
-        <>
+       <>
         {authError? <p>{authError}</p> : null}
-        <form onSubmit={handleSubmit} >
-            <label htmlFor="email">Email</label>
+        <form id="logonForm" onSubmit={handleSubmit} >
+            <label className = "inputLabel"htmlFor="email">Email</label>
             <input type = "email"
-                    required
-                    id = "email"
-                    value={email}
-                    onChange={(e)=>setEmail(e.target.value)}
+                required
+                id = "email"
+                className="inputLogon"
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)}
             />
-            <label htmlFor="password">Password</label>
+            <label className= "inputLabel" htmlFor="password">Password</label>
             <input type = "password" 
-                    required
-                    id="password" 
-                    value={password} 
-                    onChange={(e)=>setPassword(e.target.value)}
+                required
+                id="password" 
+                className="inputLogon"
+                value={password} 
+                onChange={(e)=>setPassword(e.target.value)}
             />
-            <button type="submit" disabled={isLoggingOn}>Logon
+            <button 
+                type="submit" 
+                disabled={isLoggingOn}
+                id ="logonButton">
+                Logon
   
-</button>
+            </button>
         </form>
         </>
     )

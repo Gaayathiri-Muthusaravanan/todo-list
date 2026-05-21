@@ -1,17 +1,17 @@
 
-#appContainer{
-    max-width: 1400px;
-    margin: 50px auto;
+#appContainer,#formContainer{
+   
+    padding:50px;
     
     display:flex;
     flex-direction: column;
     align-items: center;
-    background:#f2f5f4;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+   
+   background-color: #f1f2f4;
     font-family: Arial, sans-serif;
-    min-height: 85vh;
+    
 }
+
 #appHeading{
     color: white;
     background-color: #122037;
@@ -19,7 +19,7 @@
 
     justify-content: center;
     padding: 20px;
-    width: 97%;
+    width: 100%;
    
    
 
@@ -40,13 +40,8 @@
     color: black;
     
 }
-.todoInput{
-    font-size: large;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 20px 20px;
-   
-}
+
+
 #updateButton{
     background-color: #2a7db1;
   border: none;
@@ -73,7 +68,7 @@
   margin: 4px 2px;
   cursor: pointer;
 }
-#addTodoButton{
+#addTodoButton,#logonButton{
      background-color:#137752;
   border: none;
   border-radius: 5px;
@@ -102,4 +97,31 @@
 }
 label{
     font-size: x-large;
+}
+#logonForm{
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+    align-items: center;
+    margin-top: 90px;
+
+}
+.inputLogon{
+   
+    width: 30%;
+    padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: #fff;
+  
+
+}
+.todoInput{
+       width: 40%;
+    padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: #fff;
 }

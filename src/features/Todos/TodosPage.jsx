@@ -22,7 +22,9 @@ useEffect(()=>{
             throw new Error("response not ok")
           }
           const data =await response.json();
+          
           setTodoList(data.tasks);
+          console.log(data);
       }
       catch(error){
         setError(error.message);
@@ -34,25 +36,77 @@ useEffect(()=>{
   fetchTodos();
 },[token]);
 
-    const addTodo = (todoTitle) => {
-    const newTodo = {
+
+//Add Todo
+    const addTodo = async(todoTitle) => {
+    const tempTodo = {
       id: Date.now(),
       title: todoTitle,
       isCompleted: false,
     };
-
-    setTodoList((prev) => [newTodo, ...prev]);
+    setTodoList((prev) => [tempTodo, ...prev]);
+  
+    const response = await fetch('/api/tasks',{
+      method: 'POST',
+      body : JSON.stringify({
+        title : todoTitle,
+        isCompleted: false
+      }),
+      headers: {
+        'Content-Type' : 'application/json',
+        'X-CSRF-TOKEN' : token
+      },
+      credentials: 'include'
+    })
+    if(!response.ok){
+      throw new Error("Failed to add todo");
+    }
+    const realTodo = await response.json();
+    console.log(realTodo);
+    setTodoList(previous=>
+      previous.map((todo)=>
+    todo.id=== tempTodo.id? realTodo:todo));
+    
   };
-    const completeTodo = (id) => {
+
+
+  //Complete Todo
+
+    const completeTodo = async(id) => {
       const updatedTodo = todoList.map((todo) =>
       {
         if(todo.id === id){
           return {...todo,isCompleted:true};
         }
         return todo;
-      } );
-       setTodoList(updatedTodo);
-    };
+      });
+      
+      setTodoList(updatedTodo);
+      try{
+        const response = await fetch("/api/tasks/${id}",{
+          method: 'PATCH',
+          body : JSON.stringify({
+            isCompleted: true
+          }),
+          headers: {
+            'Content-Type' : 'application/json',
+            'X-CSRF-TOKEN' : token
+          }
+        })
+        if(!response.ok){
+          throw new Error("Failed to complete task");
+        }
+      }catch(error){
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) =>
+              todo.id === id ? originalTodo : todo
+        ));
+        setError("Failed to complete todo");
+      }
+    }
+
+
+
     const updateTodo = (editedTodo) =>{
       const updatedTodos = todoList.map((todo)=>
       {
@@ -65,10 +119,6 @@ useEffect(()=>{
     }
     return(
      <div id="appContainer">
-      <div id ="appHeading" >
-        
-        <h1>TO-DO LIST</h1>
-      </div>
       <div><TodoForm onAddTodo = {addTodo}/></div>
       <div><TodoList todoList={todoList} onCompleteTodo ={completeTodo} onUpdateTodo = {updateTodo}/></div>
     </div>)
