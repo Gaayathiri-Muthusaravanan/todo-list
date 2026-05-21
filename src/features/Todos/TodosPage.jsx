@@ -147,6 +147,7 @@ const updateTodo = async(editedTodo) =>{
             previous.map((todo)=>
                 todo.id === originalTodo.id ? originalTodo : todo));
   }
+  setError(error.message);
 
 }
     return(
