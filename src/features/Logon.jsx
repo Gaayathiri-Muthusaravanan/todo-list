@@ -57,7 +57,7 @@ function Logon({onSetEmail, onSetToken}){
                 type="submit" 
                 disabled={isLoggingOn}
                 id ="logonButton">
-                Logon
+                {isLoggingOn? "Logging in" : "Logon"}
   
             </button>
         </form>

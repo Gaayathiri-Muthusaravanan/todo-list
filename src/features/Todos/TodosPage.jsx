@@ -46,26 +46,29 @@ useEffect(()=>{
     };
     setTodoList((prev) => [tempTodo, ...prev]);
   
-    const response = await fetch('/api/tasks',{
-      method: 'POST',
-      body : JSON.stringify({
-        title : todoTitle,
-        isCompleted: false
-      }),
-      headers: {
+    try{
+      const response = await fetch('/api/tasks',{
+        method: 'POST',
+        body : JSON.stringify({
+          title : todoTitle,
+          isCompleted: false
+        }),
+        headers: {
         'Content-Type' : 'application/json',
         'X-CSRF-TOKEN' : token
-      },
-      credentials: 'include'
-    })
-    if(!response.ok){
-      throw new Error("Failed to add todo");
+        },
+        credentials: 'include'
+        })
+      if(!response.ok){
+        throw new Error("Failed to add todo");
+      }
+    }catch(error){
+      const realTodo = await response.json();
+      console.log(realTodo);
+      setTodoList(previous=>
+        previous.map((todo)=>
+      todo.id=== tempTodo.id? realTodo:todo));
     }
-    const realTodo = await response.json();
-    console.log(realTodo);
-    setTodoList(previous=>
-      previous.map((todo)=>
-    todo.id=== tempTodo.id? realTodo:todo));
     
   };
 
@@ -118,6 +121,7 @@ useEffect(()=>{
       setTodoList(updatedTodos);
     }
     return(
+      
      <div id="appContainer">
       <div><TodoForm onAddTodo = {addTodo}/></div>
       <div><TodoList todoList={todoList} onCompleteTodo ={completeTodo} onUpdateTodo = {updateTodo}/></div>
