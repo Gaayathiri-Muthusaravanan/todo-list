@@ -26,7 +26,6 @@ useEffect(()=>{
           const data =await response.json();
           
           setTodoList(data.tasks);
-          console.log(data);
       }
       catch(error){
         setError(error.message);
@@ -146,8 +145,9 @@ const updateTodo = async(editedTodo) =>{
     setTodoList((previous)=>
             previous.map((todo)=>
                 todo.id === originalTodo.id ? originalTodo : todo));
+    setError(error.message);
   }
-  setError(error.message);
+  
 
 }
     return(
