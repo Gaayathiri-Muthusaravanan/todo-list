@@ -103,6 +103,7 @@ const completeTodo = async(id) => {
             isCompleted : true,
 
           }),
+          credentials : 'include',
       })
       if(!response.ok){
           throw new Error("Failed to complete todo");
@@ -127,8 +128,8 @@ const updateTodo = async(editedTodo) =>{
     const response = await fetch(`/api/tasks/${editedTodo.id}`,{
       method : 'PATCH',
       body : JSON.stringify({
-          title : originalTodo.title,
-          isCompleted : true,
+          title : editedTodo.title,
+          isCompleted : editedTodo.isCompleted,
       }),
       credentials : 'include',
       headers : {
@@ -142,7 +143,7 @@ const updateTodo = async(editedTodo) =>{
   }catch(error){
     setTodoList((previous)=>
             previous.map((todo)=>
-                todo.id === originalTodo ? originalTodo : todo));
+                todo.id === originalTodo.id ? originalTodo : todo));
   }
 
 }
