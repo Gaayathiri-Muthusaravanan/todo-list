@@ -76,14 +76,11 @@ const addTodo = async(todoTitle) => {
     }catch(error){
        setTodoList( previous =>
                       previous.filter(todo=>
-                        todo.id === tempTodo.id 
+                        todo.id !== tempTodo.id 
                       )
       );
        setError(error.message);
-    }
-  
-   console.log(tempTodo);
-    
+    }    
   };
 
 
@@ -125,7 +122,7 @@ const completeTodo = async(id) => {
 //Update Todo Functionality
 const updateTodo = async(editedTodo) =>{
   const originalTodo = todoList.find(todo => todo.id === editedTodo.id);
-  console.log(originalTodo)
+  
   const updatedTodos = todoList.map((todo)=>
        todo.id === editedTodo.id ? editedTodo : todo);
   setTodoList(updatedTodos);
@@ -155,8 +152,9 @@ const updateTodo = async(editedTodo) =>{
     return(
       <>
         {isTodoListLoading && (<p>Loading todos</p>)}
-        {error && (
-          <button onClick={() => setError("")}>Clear Error</button>
+        {error && (<>
+          <p>{error}</p>
+          <button onClick={() => setError("")}>Clear Error</button></>
         )}
         <div id="appContainer">
           <div><TodoForm onAddTodo = {addTodo}/></div>
