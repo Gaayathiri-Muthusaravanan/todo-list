@@ -7,8 +7,10 @@ const[todoList, setTodoList] = useState([]);
 const [error, setError] = useState("");
 const [isTodoListLoading, setIsTodoListLoading] = useState(false);
 useEffect(()=>{
+  if (!token) return;
   async function fetchTodos(){
      setIsTodoListLoading(true);
+     setError("");
       try{
           const response = await fetch('/api/tasks', {
                 method: 'GET',
@@ -87,7 +89,8 @@ const addTodo = async(todoTitle) => {
         const response = await fetch(`/api/tasks/${id}`,{
           method: 'PATCH',
           body : JSON.stringify({
-            isCompleted: true
+            isCompleted: true,
+            createdAt: todo.createdAt
           }),
           headers: {
             'Content-Type' : 'application/json',
@@ -124,7 +127,8 @@ const addTodo = async(todoTitle) => {
           method: 'PATCH',
           body : JSON.stringify({
              title: editedTodo.title,
-        isCompleted: editedTodo.isCompleted
+            isCompleted: editedTodo.isCompleted,
+            createdAt: editedTodo.createdAt
           }),
           headers: {
             'Content-Type' : 'application/json',
@@ -144,12 +148,15 @@ const addTodo = async(todoTitle) => {
       }
     }
     return(
-
-     <div id="appContainer">
-      <div><TodoForm onAddTodo = {addTodo}/></div>
-      <div><TodoList todoList={todoList} onCompleteTodo ={completeTodo} onUpdateTodo = {updateTodo}/></div>
-    </div>)
-    
+      <>
+        {isTodoListLoading && (<p>Loading todos</p>)}
+        {error && (<p>{error}</p>)}
+        <div id="appContainer">
+          <div><TodoForm onAddTodo = {addTodo}/></div>
+          <div><TodoList todoList={todoList} onCompleteTodo ={completeTodo} onUpdateTodo = {updateTodo}/></div>
+        </div>
+      </>
+    )
 }
 
 export default TodosPage
