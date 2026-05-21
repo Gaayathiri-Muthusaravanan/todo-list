@@ -77,7 +77,7 @@ const addTodo = async(todoTitle) => {
 
     const completeTodo = async(id) => {
       const originalTodo = todoList.find(todo => todo.id === id);
-       const updatedTodos = todoList.map(todo =>
+       const updatedTodo = todoList.map(todo =>
       todo.id === id
         ? { ...todo, isCompleted: true }
         : todo
@@ -92,13 +92,14 @@ const addTodo = async(todoTitle) => {
           headers: {
             'Content-Type' : 'application/json',
             'X-CSRF-TOKEN' : token
-          }
+          },
+          credentials: 'include'
         })
         if(!response.ok){
           throw new Error("Failed to complete task");
         }
       }catch(error){
-        setTodos((prevTodos) =>
+        setTodoList((prevTodos) =>
             prevTodos.map((todo) =>
               todo.id === id ? originalTodo : todo
         ));
