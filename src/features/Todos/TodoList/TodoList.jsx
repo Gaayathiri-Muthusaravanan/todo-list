@@ -5,7 +5,7 @@ function TodoList({todoList, onCompleteTodo, onUpdateTodo}){
 
     return(
         filteredTodoList.length === 0 ? 
-            (<p>Add todo above to get started</p>) :
+            (<p id="todoPara">Add todo above to get started</p>) :
             (<ul>
                 { filteredTodoList.map(todo=>
                     <TodoListItem 
