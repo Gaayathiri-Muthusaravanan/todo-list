@@ -4,13 +4,13 @@ function SortBy({sortBy, sortDirection, onSortByChange, onSortDirectionChange}){
         <>
             <label htmlFor="sortBy">Sort By</label>
             <select id="sortBy" value={sortBy} onChange={(e)=>onSortByChange(e.target.value)}>
-                <option>Creation Date</option>
-                <option>Title</option>
+                <option value="creationDate">Creation Date</option>
+                <option value = "title">Title</option>
             </select>
              <label htmlFor="Order">Order</label>
             <select id="Order" value={sortDirection} onChange={(e)=>onSortDirectionChange(e.target.value)}>
-                <option>Descending</option>
-                <option>Ascending</option>
+                <option value = "desc">Descending</option>
+                <option value = "asc">Ascending</option>
             </select>
         </>
     )

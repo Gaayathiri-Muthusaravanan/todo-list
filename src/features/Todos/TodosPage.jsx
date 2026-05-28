@@ -57,7 +57,7 @@ useEffect(()=>{
           setFilterError(''); 
       }
       catch(error){
-        setError(error.message);
+        
         if (debouncedFilterTerm || sortBy !== 'creationDate' || sortDirection !== 'desc') {
           setFilterError(`Error filtering/sorting todos: ${error.message}`);
         } else {
@@ -219,7 +219,7 @@ const updateTodo = async(editedTodo) =>{
             onCompleteTodo ={completeTodo} 
             onUpdateTodo = {updateTodo} 
             dataVersion={dataVersion}
-            todoList={todoList}/>
+            />
           </div>
         </div>
       </>
