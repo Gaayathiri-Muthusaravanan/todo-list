@@ -22,7 +22,7 @@ const [dataVersion, setDataVersion] = useState(0);
 const [filterError, setFilterError] = useState("");
 const invalidateCache = useCallback(() => {
   setDataVersion(prev => prev + 1);
-  console.log("Invalidating memo cache after todo mutation");
+  
 },[]);
 const handleFilterChange = (newTerm) => { setFilterTerm(newTerm); };
 
