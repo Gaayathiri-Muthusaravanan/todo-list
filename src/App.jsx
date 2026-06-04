@@ -7,7 +7,7 @@ import { useAuth } from "./contexts/AuthContext";
 function App() {
  
  const { isAuthenticated ,token} = useAuth();
- console.log("AUTH STATE:", { isAuthenticated, token });
+ 
   return (
    <>
     <Header/>

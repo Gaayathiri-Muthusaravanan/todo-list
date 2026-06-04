@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import {  useEffect, useCallback } from 'react';
 import '../../App.css';
 import SortBy from '../../shared/SortBy';
 import TodoList from './TodoList/TodoList';
@@ -235,8 +235,8 @@ const updateTodo = async(editedTodo) =>{
   }catch(error){
    dispatch({
     type: TODO_ACTIONS.UPDATE_TODO_ERROR,
-      payload: originalTodo,
-      message: error.message,
+      payload: {originalTodo,
+      message: error.message},
    })
   }
   
