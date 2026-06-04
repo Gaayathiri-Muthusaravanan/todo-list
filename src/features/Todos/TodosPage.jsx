@@ -6,13 +6,16 @@ import TodoForm from './TodoForm';
 import FilterInput from '../../shared/FilterInput';
 import { useDebounce } from '../../utils/useDebounce';
 import { useReducer } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
 import {
   todoReducer,
   initialTodoState,
   TODO_ACTIONS,
 } from '../../reducers/todoReducer';
 
-function TodosPage({token}){
+function TodosPage(){
+
+   const { token } = useAuth();
 const [state, dispatch] = useReducer(
   todoReducer,
   initialTodoState
@@ -30,10 +33,10 @@ const {
 const debouncedFilterTerm = useDebounce(filterTerm, 300);
 const invalidateCache = useCallback(() => {
   dispatch({
-    type : TODO_ACTIONS.INVALIDATE-CACHE,
+    type : TODO_ACTIONS.INVALIDATE_CACHE,
   })
   
-},[]);
+},[dataVersion]);
 const handleFilterChange = (newTerm) => { 
    dispatch({
     type: TODO_ACTIONS.SET_FILTER,
@@ -70,7 +73,7 @@ useEffect(()=>{
             throw new Error("response not ok")
           }
           const todos = await response.json();
-          console.log(todos);
+          
           dispatch({
             type: TODO_ACTIONS.FETCH_SUCCESS,
             payload: { 
@@ -130,7 +133,7 @@ const addTodo = async(todoTitle) => {
       }
      
       const data = await response.json();
-      console.log("POST rjhvghcfgxdfxdfesponse:", data);
+      
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_SUCCESS,
         payload: {
@@ -225,7 +228,7 @@ const updateTodo = async(editedTodo) =>{
     dispatch({
     type: TODO_ACTIONS.UPDATE_TODO_SUCCESS,
     payload: {
-      editedTodo,
+      originalTodo,
     },
   });
     invalidateCache();

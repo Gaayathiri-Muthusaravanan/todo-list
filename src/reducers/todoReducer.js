@@ -19,7 +19,7 @@ export const TODO_ACTIONS = {
     UPDATE_TODO_START: 'UPDATE_TODO_START',
     UPDATE_TODO_SUCCESS: 'UPDATE_TODO_SUCCESS',
     UPDATE_TODO_ERROR: 'UPDATE_TODO_ERROR',
-
+    INVALIDATE_CACHE: 'INVALIDATE_CACHE',
     SET_SORT: 'SET_SORT',
     SET_FILTER: 'SET_FILTER', 
 
@@ -39,6 +39,7 @@ export const initialTodoState = {
   dataVersion: 0,
 };
 export function todoReducer(state, action) {
+   console.log('Dispatched action:', action.type, action.payload); 
   switch (action.type) {
     // We'll add cases here
     case TODO_ACTIONS.FETCH_START:
@@ -70,7 +71,7 @@ export function todoReducer(state, action) {
         todoList: [action.payload.tempTodo, ...state.todoList],
       };
     case TODO_ACTIONS.ADD_TODO_SUCCESS:
-      console.log("savedTodo:", action.payload.savedTodo);
+     
       return {
         ...state,
         todoList:  state.todoList.map(todo=>
