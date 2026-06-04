@@ -5,32 +5,50 @@ import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
 import FilterInput from '../../shared/FilterInput';
 import { useDebounce } from '../../utils/useDebounce';
+import { useReducer } from 'react';
+import {
+  todoReducer,
+  initialTodoState,
+  TODO_ACTIONS,
+} from '../../reducers/todoReducer';
+
 function TodosPage({token}){
-
-const[todoList, setTodoList] = useState([]);
-const [error, setError] = useState("");
-const [isTodoListLoading, setIsTodoListLoading] = useState(false);
-
-const [sortBy, setSortBy] = useState('creationDate');
-const [sortDirection, setSortDirection] = useState('desc');
-
-const [filterTerm, setFilterTerm] = useState('');
+const [state, dispatch] = useReducer(
+  todoReducer,
+  initialTodoState
+);
+const {
+  todoList,
+  error,
+  filterError,
+  isTodoListLoading,
+  sortBy,
+  sortDirection,
+  filterTerm,
+  dataVersion,
+} = state;
 const debouncedFilterTerm = useDebounce(filterTerm, 300);
-
-const [dataVersion, setDataVersion] = useState(0);
-
-const [filterError, setFilterError] = useState("");
 const invalidateCache = useCallback(() => {
-  setDataVersion(prev => prev + 1);
+  dispatch({
+    type : TODO_ACTIONS.INVALIDATE-CACHE,
+  })
   
 },[]);
-const handleFilterChange = (newTerm) => { setFilterTerm(newTerm); };
+const handleFilterChange = (newTerm) => { 
+   dispatch({
+    type: TODO_ACTIONS.SET_FILTER,
+    payload: {
+      filterTerm: newTerm,
+    },
+  });
+ };
 
 useEffect(()=>{
   if (!token) return;
   async function fetchTodos(){
-     setIsTodoListLoading(true);
-     setError("");
+    dispatch({
+      type: TODO_ACTIONS.FETCH_START,
+    });
       try{
         const paramsObject = {
             sortBy,
@@ -51,21 +69,29 @@ useEffect(()=>{
           if(!response.ok){
             throw new Error("response not ok")
           }
-          const data =await response.json();
+          const todos = await response.json();
+          console.log(todos);
+          dispatch({
+            type: TODO_ACTIONS.FETCH_SUCCESS,
+            payload: { 
+              todos : todos.tasks,
+            },
+
+          });
+
           
-          setTodoList(data.tasks);
-          setFilterError(''); 
       }
       catch(error){
-        
-        if (debouncedFilterTerm || sortBy !== 'creationDate' || sortDirection !== 'desc') {
-          setFilterError(`Error filtering/sorting todos: ${error.message}`);
-        } else {
-          setError(`Error fetching todos: ${error.message}`);
-        }
+        dispatch({
+  type: TODO_ACTIONS.FETCH_ERROR,
+  payload: {
+    message: `Error fetching todos: ${error.message}`,
+    isFilterError: false,
+  },
+});
       }
       finally{
-        setIsTodoListLoading(false);
+        //setIsTodoListLoading(false);
       }
     }
   fetchTodos();
@@ -78,8 +104,12 @@ const addTodo = async(todoTitle) => {
       title: todoTitle,
       isCompleted: false,
     };
+    dispatch({
+      type: TODO_ACTIONS.ADD_TODO_START,
+      payload: {tempTodo}
+    });
     
-    setTodoList((prev) => [tempTodo, ...prev]);
+    
     try{
       const response = await fetch(`/api/tasks`,{
         method : 'POST',
@@ -98,22 +128,28 @@ const addTodo = async(todoTitle) => {
       {
         throw new Error("Failed to add");
       }
-
+     
       const data = await response.json();
-      setTodoList( previous =>
-                      previous.map(todo=>
-                        todo.id === tempTodo.id ? data : todo
-                      )
-      );
+      console.log("POST rjhvghcfgxdfxdfesponse:", data);
+      dispatch({
+        type: TODO_ACTIONS.ADD_TODO_SUCCESS,
+        payload: {
+          tempId: tempTodo.id,
+          savedTodo: data,
+        },
+      });
       invalidateCache();
       
     }catch(error){
-       setTodoList( previous =>
-                      previous.filter(todo=>
-                        todo.id !== tempTodo.id 
-                      )
-      );
-       setError(error.message);
+       
+       dispatch({
+      type: TODO_ACTIONS.ADD_TODO_ERROR,
+      payload: {
+        tempId: tempTodo.id,
+        message: error.message,
+      },
+    });
+       
     }    
   };
 
@@ -121,12 +157,12 @@ const addTodo = async(todoTitle) => {
 //Complete Todo
 const completeTodo = async(id) => {
   const originalTodo = todoList.find(todo => todo.id === id);
-  const updatedTodo = todoList.map(todo =>
-      todo.id === id
-        ? { ...todo, isCompleted: true }
-        : todo
-  );
-  setTodoList(updatedTodo);
+  dispatch({
+    type: TODO_ACTIONS.COMPLETE_TODO_START,
+    payload: {
+      id,
+    },
+  });
   try{
       const response = await fetch(`/api/tasks/${id}`,{
           method : 'PATCH',
@@ -144,23 +180,32 @@ const completeTodo = async(id) => {
       if(!response.ok){
           throw new Error("Failed to complete todo");
       }
+       dispatch({
+      type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS,
+      payload: { id },
+    });
       invalidateCache();
     }catch(error){
-      setTodoList((previous)=>
-                    previous.map((todo)=>
-                      todo.id === id ? originalTodo : todo )
-      )
-      setError(error.message);
+      dispatch({
+      type: TODO_ACTIONS.COMPLETE_TODO_ERROR,
+      payload: {
+        originalTodo,
+        message: error.message,
+      },
+    });
     }
 }
 
 //Update Todo Functionality
 const updateTodo = async(editedTodo) =>{
   const originalTodo = todoList.find(todo => todo.id === editedTodo.id);
+  dispatch({
+    type: TODO_ACTIONS.UPDATE_TODO_START,
+    payload: {
+      editedTodo,
+    },
+  });
   
-  const updatedTodos = todoList.map((todo)=>
-       todo.id === editedTodo.id ? editedTodo : todo);
-  setTodoList(updatedTodos);
   try{
     const response = await fetch(`/api/tasks/${editedTodo.id}`,{
       method : 'PATCH',
@@ -177,12 +222,19 @@ const updateTodo = async(editedTodo) =>{
     if(!response.ok){
       throw new Error("Failed to update todo");
     }
+    dispatch({
+    type: TODO_ACTIONS.UPDATE_TODO_SUCCESS,
+    payload: {
+      editedTodo,
+    },
+  });
     invalidateCache();
   }catch(error){
-    setTodoList((previous)=>
-            previous.map((todo)=>
-                todo.id === originalTodo.id ? originalTodo : todo));
-    setError(error.message);
+   dispatch({
+    type: TODO_ACTIONS.UPDATE_TODO_ERROR,
+      payload: originalTodo,
+      message: error.message,
+   })
   }
   
 
@@ -192,26 +244,57 @@ const updateTodo = async(editedTodo) =>{
         {isTodoListLoading && (<p>Loading todos</p>)}
         {error && (<>
           <p>{error}</p>
-          <button onClick={() => setError("")}>Clear Error</button></>
+          <button onClick={() => 
+            dispatch({
+              type: TODO_ACTIONS.CLEAR_ERROR,
+            })}>
+          Clear Error
+          </button>
+
+      </>
         )}
         {filterError && 
           (<div>
             <p>{filterError}</p>
-            <button onClick={() => setFilterError('')}>Clear Filter Error</button>
+            <button onClick={() => 
+            dispatch({
+              type: TODO_ACTIONS.CLEAR_ERROR,
+            })}>Clear Filter Error</button>
 
             <button
-              onClick={() => {
-                setFilterTerm('');
-                setSortBy('creationDate');
-                setSortDirection('desc');
-                setFilterError('');
-              }}>
+             onClick={() =>
+        dispatch({
+          type: TODO_ACTIONS.RESET_FILTERS,
+        })
+      }
+             >
               Reset Filters
             </button>
           </div>)
         }
         <div id="appContainer">
-          <div><SortBy sortBy={sortBy} sortDirection = {sortDirection} onSortByChange={setSortBy} onSortDirectionChange = {setSortDirection}/></div>
+          <div><SortBy 
+            sortBy={sortBy} 
+            sortDirection = {sortDirection} 
+             onSortByChange={(newSortBy) =>
+    dispatch({
+      type: TODO_ACTIONS.SET_SORT,
+      payload: {
+        sortBy: newSortBy,
+        sortDirection,
+      },
+    })
+  }
+  onSortDirectionChange={(newDirection) =>
+    dispatch({
+      type: TODO_ACTIONS.SET_SORT,
+      payload: {
+        sortBy,
+        sortDirection: newDirection,
+      },
+    })
+  }/>
+          </div>
           <div><FilterInput filterTerm = {filterTerm} onFilterChange = {handleFilterChange}/></div>
           <div><TodoForm onAddTodo = {addTodo}/></div>
           <div><TodoList 
