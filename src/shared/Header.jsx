@@ -7,8 +7,10 @@ function Header(){
     const { isAuthenticated } = useAuth();
     return(
         <div id = "appHeading">
+            <div id = "titleSection">
             <img id = "todoImage" src = {todoImg} alt="image" />
-            <h1>TO-DO LIST</h1>
+            <h1 id = "headingText">TO-DO LIST</h1>
+            </div>
             <Navigation />
              {isAuthenticated&& <Logout/>}
 

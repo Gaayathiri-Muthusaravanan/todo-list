@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import TodoListItem from "./TodoListItem";
-import StatusFilter from "../../../shared/StatusFilter";
+
 function TodoList({todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusFilter = 'active',}){
    
     const filteredTodoList = useMemo(()=>{

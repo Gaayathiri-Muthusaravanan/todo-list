@@ -1,4 +1,4 @@
-
+import '../App.css'
 import { useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -19,7 +19,7 @@ function Logout(){
   };
 
   return (
-    <button onClick={handleLogout}>
+    <button id = "logOffButton" onClick={handleLogout}>
       Logoff
     </button>
   );
