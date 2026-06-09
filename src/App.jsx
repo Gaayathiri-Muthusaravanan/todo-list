@@ -3,7 +3,6 @@ import Header from "./shared/Header";
 
 import { Routes,Route } from "react-router";
 
-import { useAuth } from "./contexts/AuthContext";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import LoginPage from "./pages/LoginPage";

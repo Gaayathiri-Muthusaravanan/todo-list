@@ -1,34 +1,72 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
 function ProfilePage() {
+    const { token, user } = useAuth();
   const [stats, setStats] = useState({
     total: 0,
     completed: 0,
     active: 0,
   });
+  const [loading, setLoading] = useState(false);
+const [error, setError] = useState('');
 
   useEffect(() => {
-    async function loadStatisticss() {
-      const response = await fetch('/api/todos');
-      const todos = await response.json();
+  async function fetchTodoStats() {
+    if (!token) return;
 
+    try {
+      setLoading(true);
+      setError('');
+
+      const options = {
+        method: 'GET',
+        headers: { 'X-CSRF-TOKEN': token },
+        credentials: 'include',
+      };
+
+      const response = await fetch('/api/tasks', options);
+
+      if (response.status === 401) {
+        throw new Error('Unauthorized');
+      }
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch todos');
+      }
+
+      const datas = await response.json();
+      const todos = datas.tasks;
+
+      // Calculate statistics
       const total = todos.length;
-      const completed = todos.filter(todo => todo.completed).length;
+      const completed = todos.filter((todo) => todo.isCompleted).length;
       const active = total - completed;
 
       setStats({ total, completed, active });
+    } catch (err) {
+      setError(`Error loading statistics: ${err.message}`);
+    } finally {
+      setLoading(false);
     }
+  }
 
-    loadStatisticss();
-  }, []);
+  fetchTodoStats();
+}, [token]);
 
   return (
     <div>
       <h1>Profile</h1>
+     <p>User:{JSON.stringify(user)}</p>
 
+    {loading && <p>Loading statistics...</p>}
+    {error && <p style={{ color: 'red' }}>{error}</p>}
+    {!loading && !error && (
+      <>
       <p>Total Todos: {stats.total}</p>
       <p>Completed Todos: {stats.completed}</p>
       <p>Active Todos: {stats.active}</p>
+      </>)}
     </div>
   );
 }
