@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
 function ProfilePage() {
-    const { token, user } = useAuth();
+    const { token, email } = useAuth();
   const [stats, setStats] = useState({
     total: 0,
     completed: 0,
@@ -57,7 +57,7 @@ const [error, setError] = useState('');
   return (
     <div>
       <h1>Profile</h1>
-     <p>User:{JSON.stringify(user)}</p>
+     <p>User: {email}</p>
 
     {loading && <p>Loading statistics...</p>}
     {error && <p style={{ color: 'red' }}>{error}</p>}
