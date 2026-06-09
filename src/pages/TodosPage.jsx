@@ -1,17 +1,17 @@
 import {  useEffect, useCallback } from 'react';
-import '../../App.css';
-import SortBy from '../../shared/SortBy';
-import TodoList from './TodoList/TodoList';
-import TodoForm from './TodoForm';
-import FilterInput from '../../shared/FilterInput';
-import { useDebounce } from '../../utils/useDebounce';
+import '../App.css';
+import SortBy from '../shared/SortBy';
+import TodoList from '../features/Todos/TodoList/TodoList';
+import TodoForm from '../features/Todos/TodoForm';
+import FilterInput from '../shared/FilterInput';
+import { useDebounce } from '../utils/useDebounce';
 import { useReducer } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import {
   todoReducer,
   initialTodoState,
   TODO_ACTIONS,
-} from '../../reducers/todoReducer';
+} from '../reducers/todoReducer';
 
 function TodosPage(){
 
