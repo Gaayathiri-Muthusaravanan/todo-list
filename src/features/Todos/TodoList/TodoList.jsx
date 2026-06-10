@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import TodoListItem from "./TodoListItem";
 
-function TodoList({todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusFilter = 'active',filterTerm=''}){
+function TodoList({todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusFilter = 'all',filterTerm=''}){
    
     const filteredTodoList = useMemo(()=>{
           
@@ -19,11 +19,6 @@ function TodoList({todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusFi
         filteredTodos = todoList;
         break;
     }
-    if (filterTerm.trim()) {
-  filteredTodos = filteredTodos.filter((todo) =>
-    todo.title.toLowerCase().includes(filterTerm.toLowerCase())
-  );
-}
         
         return {
             version: dataVersion,
@@ -31,11 +26,7 @@ function TodoList({todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusFi
         };
     },[dataVersion, todoList,statusFilter]);
      const getEmptyMessage = () => {
-      if (filterTerm.trim()) {
-      return `No todos found matching "${filterTerm}".`;
-    }
     switch (statusFilter) {
-      
       case 'completed':
         return 'No completed todos yet. Complete some tasks to see them here.';
       case 'active':
