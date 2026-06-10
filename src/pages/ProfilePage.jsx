@@ -66,6 +66,13 @@ const [error, setError] = useState('');
       <p>Total Todos: {stats.total}</p>
       <p>Completed Todos: {stats.completed}</p>
       <p>Active Todos: {stats.active}</p>
+      <p>
+      Completion Rate:{' '}
+      {stats.total > 0
+        ? Math.round((stats.completed / stats.total) * 100)
+        : 0}
+      %
+    </p>
       </>)}
     </div>
   );

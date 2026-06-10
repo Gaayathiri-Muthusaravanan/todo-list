@@ -1,6 +1,6 @@
 function AboutPage() {
   return (
-    <div>
+    <div id  = "aboutPageDiv">
       <h1>About This Todo App</h1>
 
       <p>
