@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-
+import '../css/profilePage.css'
 function ProfilePage() {
     const { token, email } = useAuth();
   const [stats, setStats] = useState({
@@ -55,25 +55,47 @@ const [error, setError] = useState('');
 }, [token]);
 
   return (
-    <div>
-      <h1>Profile</h1>
-     <p>User: {email}</p>
+    <div className="profilePage">
+      <div className="profileHeader">
+      <h1 id = "profileHeading">Profile</h1>
+       <div className="profileUser">
+        <p>Hello {email},</p>
+       </div>
+       </div>
+     
 
-    {loading && <p>Loading statistics...</p>}
-    {error && <p style={{ color: 'red' }}>{error}</p>}
+    {loading && <p className="infoText"> Loading statistics...</p>}
+    {error && <p  className="errorText" style={{ color: 'red' }}>{error}</p>}
     {!loading && !error && (
-      <>
-      <p>Total Todos: {stats.total}</p>
-      <p>Completed Todos: {stats.completed}</p>
-      <p>Active Todos: {stats.active}</p>
-      <p>
-      Completion Rate:{' '}
+      <div className="statsGrid">
+        <div className="card total">
+          <span className="icon">📋</span>
+          <h2>Total Todos</h2>
+          
+          <p className='cardPara'>{stats.total}</p>
+        </div>
+        <div className="card completed">
+          <span className="icon">✅</span>
+           <h2>Completed Todos</h2> 
+           <p className='cardPara'>{stats.completed}</p>
+        </div>
+        <div className="card active">
+          <span className="icon">⏳</span>
+          <h2>Active Todos</h2>
+          <p className='cardPara'>{stats.active}</p>
+        </div>
+         <div className="card rate">
+          <span className="icon">📊</span>
+          <h2>Completion Rate</h2>
+          <p className='cardPara'>
+          
       {stats.total > 0
         ? Math.round((stats.completed / stats.total) * 100)
         : 0}
       %
     </p>
-      </>)}
+    </div>
+      </div>)}
     </div>
   );
 }

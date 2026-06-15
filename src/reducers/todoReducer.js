@@ -107,9 +107,10 @@ export function todoReducer(state, action) {
       return{
         ...state,
         todoList:state.todoList.map(todo=>
-            todo.id !== action.payload.originalTodo.id?
-            action.payload.originalTodo
-        : todo
+            todo.id === action.payload.originalTodo.id
+  ? action.payload.originalTodo
+  : todo
+        
         ),
         error: action.payload.message,
       }

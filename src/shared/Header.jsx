@@ -2,6 +2,7 @@ import '../App.css'
 import todoImg from '../assets/todo.jpeg'
 import { useAuth } from '../contexts/AuthContext';
 import Logout from "../features/Logout"
+import '../css/header.css';
 import Navigation from './Navigation';
 function Header(){
     const { isAuthenticated } = useAuth();

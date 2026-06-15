@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
-
+import '../css/loginPage.css';
 function LoginPage() {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -38,9 +38,18 @@ function LoginPage() {
    
   
   return(
-     <>
+     <div className="login-container">
+       
+   <div className="split-left">
+      <div className="left-content">
+        <h1>Stay Organized. Stay Ahead.</h1>
+        <p>Organize your tasks, stay focused, and get things done effortlessly.</p>
+      </div>
+    </div>
         {authError? <p>{authError}</p> : null}
         <form id="logonForm" onSubmit={handleSubmit} >
+            <h2>Hello again,</h2>
+            <p>Login to your account to continue</p>
             <label className = "inputLabel"htmlFor="email">Email</label>
             <input type = "email"
                 required
@@ -65,7 +74,7 @@ function LoginPage() {
   
             </button>
         </form>
-        </>
+        </div>
     
   )
   // ... rest of component with form JSX
