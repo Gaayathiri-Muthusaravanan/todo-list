@@ -4,7 +4,7 @@ import TodoListItem from "./TodoListItem";
 function TodoList({todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusFilter = 'all',filterTerm=''}){
    
     const filteredTodoList = useMemo(()=>{
-          
+         
 
     let filteredTodos;
     switch (statusFilter) {
@@ -19,13 +19,21 @@ function TodoList({todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusFi
         filteredTodos = todoList;
         break;
     }
-        
+          if (filterTerm.trim() !== '') {
+    filteredTodos = filteredTodos.filter((todo) =>
+      todo.title.toLowerCase().includes(filterTerm.toLowerCase())
+    );
+  }
         return {
             version: dataVersion,
             todos: filteredTodos,
         };
-    },[dataVersion, todoList,statusFilter]);
+    },[dataVersion, todoList,statusFilter,filterTerm]);
      const getEmptyMessage = () => {
+      if (filterTerm.trim() !== '') {
+    return 'No todos match your search.';
+  }
+
     switch (statusFilter) {
       case 'completed':
         return 'No completed todos yet. Complete some tasks to see them here.';

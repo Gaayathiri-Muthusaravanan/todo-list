@@ -1,0 +1,85 @@
+#aboutPageDiv {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 40px 20px;
+}
+
+
+#aboutPageDiv h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+
+#aboutPageDiv p {
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 50px;
+}
+
+
+.aboutFlex {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+
+.about-section {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.about-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+
+.about-section ul {
+  list-style: none;
+}
+
+.about-section li {
+  padding: 14px 0 14px 50px;
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+
+.about-section li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+
+.about-section li:hover {
+  color: var(--primary);
+}
+
+
+@media (max-width: 600px) {
+  #aboutPageDiv h1 {
+    font-size: 2rem;
+  }
+
+  #aboutPageDiv p {
+    font-size: 1rem;
+  }
+}

@@ -1,5 +1,5 @@
 import Header from "./shared/Header";
-
+import './App.css';
 
 import { Routes,Route } from "react-router";
 
@@ -13,7 +13,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 function App() {
  
   return (
-   <>
+   <div id="appContainer">
     <Header/>
      <Routes>
         <Route path="/" element={<HomePage />} />
@@ -37,7 +37,7 @@ function App() {
         />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
-  </>
+  </div>
   );
 }
 
