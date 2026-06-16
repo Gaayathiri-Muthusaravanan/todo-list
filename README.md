@@ -1,21 +1,10 @@
 # Todo List App
 
-## Description
+## Project Title and Description
+TodoList App
 A simple Todo List application built using React and Vite. This app displays a list of todos and demonstrates basic React concepts like components and rendering lists.
-
-## Installation
-Bootstrap a new project: npx create-vite@latest --template react .gi
-After any prompts, install the project dependencies using NPM: npm install
-
-## Running the Development Server
-npm run dev
-
-Then open your browser and go to : http://localhost:5173
-
 ## Live Demo
 https://todo-list-kzgfmklww-gaayathiri-muthusaravanans-projects.vercel.app/login
-
-
 
 ## Features
 - User authentication (login/logout)
@@ -25,8 +14,6 @@ https://todo-list-kzgfmklww-gaayathiri-muthusaravanans-projects.vercel.app/login
 - Responsive UI design
 - Protected API routes
 
-
-
 ## Technologies Used
 - React.js
 - Vite
@@ -34,7 +21,7 @@ https://todo-list-kzgfmklww-gaayathiri-muthusaravanans-projects.vercel.app/login
 - CSS Modules
 - Vercel (deployment)
 
-##Screnshotss
+### Screnshotss
 
 ### Desktop View
 ![Desktop Screenshot](./src/screenshots/desktop1.jpg) 
@@ -53,7 +40,18 @@ https://todo-list-kzgfmklww-gaayathiri-muthusaravanans-projects.vercel.app/login
 ![Mobile Screenshot](./src/screenshots/mobile2.jpg)
 ![Mobile Screenshot](./src/screenshots/mobile3.jpg)
 
----
+ ### Getting Started Section: Prerequisites and installation instructions
+
+## Installation
+Bootstrap a new project: npx create-vite@latest --template react .
+After any prompts, install the project dependencies using NPM: npm install
+
+## Running the Development Server
+npm run dev
+
+Then open your browser and go to : http://localhost:5173
+
+
 
 ## Design Decisions
 
@@ -76,7 +74,7 @@ The UI is designed with a clean and minimal layout to improve usability and focu
 - Input sanitization using DOMPurify
 - Form validation before submission
 
----
+
 ##  Available Scripts
 
 In the project directory, you can run:
@@ -94,10 +92,10 @@ Builds the app for production in the `dist` folder.
 ### `npm run preview`
 Locally preview the production build.
 ## License
+This project is licensed under the MIT License.
 You are free to use, modify, and distribute this project for personal or commercial purposes.
 
-## 📬 Contact
+## Contact
 
+github: https://github.com/Gaayathiri-Muthusaravanan
 
-
-Email: gaayathirigeetha@gmail.com

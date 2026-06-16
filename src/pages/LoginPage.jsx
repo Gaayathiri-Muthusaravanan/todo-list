@@ -75,7 +75,7 @@ const cleanPassword = sanitizeInput(password);
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label className={styles.InputLabel} htmlFor="password" >Password</label>
+        <label className={styles.inputLabel} htmlFor="password" >Password</label>
         <input type="password"
           maxLength={50}
           id="password"
