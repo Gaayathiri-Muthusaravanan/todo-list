@@ -30,22 +30,22 @@ function LoginPage() {
     e.preventDefault();
     setIsLoggingOn(true);
     setAuthError("");
-    const sanitizedEmail = email.trim();
-    const sanitizedPassword = password.trim();
+    const cleanEmail = sanitizeInput(email);
+const cleanPassword = sanitizeInput(password);
 
-    if (!sanitizedEmail.includes("@")) {
+    if (!cleanEmail.includes("@")) {
       setAuthError("Please enter a valid email");
       setIsLoggingOn(false);
       return;
     }
 
-    if (sanitizedPassword.length < 6) {
+    if (cleanPassword.length < 6) {
       setAuthError("Password must be at least 6 characters");
       setIsLoggingOn(false);
       return;
     }
 
-    const result = await login(sanitizedEmail, sanitizedPassword);
+    const result = await login(cleanEmail, cleanPassword);
     setIsLoggingOn(false);
     if (!result.success) {
       setAuthError("Invalid email or password");
@@ -69,7 +69,7 @@ function LoginPage() {
         <p>Login to your account to continue</p>
         <label className={styles.inputLabel} htmlFor="email">Email</label>
         <input type="email"
-
+          maxLength={50}
           id="email"
           className={styles.inputLogon}
           value={email}
@@ -77,7 +77,7 @@ function LoginPage() {
         />
         <label className={styles.InputLabel} htmlFor="password" >Password</label>
         <input type="password"
-
+          maxLength={50}
           id="password"
           className={styles.inputLogon}
           value={password}

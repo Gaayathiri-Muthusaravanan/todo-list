@@ -2,7 +2,7 @@ import styles from '../css/AboutPage.module.css';
 function AboutPage() {
   return (
     <div className={styles.aboutPageDiv}>
-      <div className={styles.aboutPageTitle}>
+      <div>
         <h1>About This Todo App</h1>
         <p>
           This application helps users manage tasks and stay organized.

@@ -14,7 +14,7 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusF
       case 'active':
         filteredTodos = todoList.filter((todo) => !todo.isCompleted);
         break;
-        c
+        
       default:
         filteredTodos = todoList;
         break;

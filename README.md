@@ -77,4 +77,27 @@ The UI is designed with a clean and minimal layout to improve usability and focu
 - Form validation before submission
 
 ---
+##  Available Scripts
 
+In the project directory, you can run:
+
+### `npm install`
+Installs all project dependencies.
+
+### `npm run dev`
+Runs the app in development mode.  
+Open http://localhost:5173 to view it in the browser.
+
+### `npm run build`
+Builds the app for production in the `dist` folder.
+
+### `npm run preview`
+Locally preview the production build.
+## License
+You are free to use, modify, and distribute this project for personal or commercial purposes.
+
+## 📬 Contact
+
+
+
+Email: gaayathirigeetha@gmail.com
