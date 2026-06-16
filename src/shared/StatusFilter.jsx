@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router';
-
+import styles from '../css/TodosPage.module.css'
 function StatusFilter() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentStatus = searchParams.get('status') || 'all';
