@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import styles from '../css/LoginPage.module.css';
+import { sanitizeInput } from "../utils/sanitize";
 function LoginPage() {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -29,22 +30,22 @@ function LoginPage() {
     e.preventDefault();
     setIsLoggingOn(true);
     setAuthError("");
-    const trimmedEmail = email.trim();
-    const trimmedPassword = password.trim();
+    const sanitizedEmail = email.trim();
+    const sanitizedPassword = password.trim();
 
-    if (!trimmedEmail.includes("@")) {
+    if (!sanitizedEmail.includes("@")) {
       setAuthError("Please enter a valid email");
       setIsLoggingOn(false);
       return;
     }
 
-    if (trimmedPassword.length < 6) {
+    if (sanitizedPassword.length < 6) {
       setAuthError("Password must be at least 6 characters");
       setIsLoggingOn(false);
       return;
     }
 
-    const result = await login(email, password);
+    const result = await login(sanitizedEmail, sanitizedPassword);
     setIsLoggingOn(false);
     if (!result.success) {
       setAuthError("Invalid email or password");

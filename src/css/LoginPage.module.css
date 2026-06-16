@@ -116,7 +116,7 @@
     flex-direction: column;
   }
 
-  .split-left {
+  .splitLeft {
     border-right: none;
     border-bottom: 1px solid #e5e7eb;
     padding: 40px 20px;
