@@ -252,9 +252,49 @@ function TodosPage() {
         },
       })
     }
-
-
+   
   }
+   //Delete todo functionality
+    const deleteTodo = async (id) => {
+  const originalTodo = todoList.find(todo => todo.id === id);
+
+  dispatch({
+    type: TODO_ACTIONS.DELETE_TODO_START,
+    payload: { id },
+  });
+
+  try {
+    const response = await fetch(`/api/tasks/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'X-CSRF-TOKEN': token,
+      },
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete todo");
+    }
+
+    dispatch({
+      type: TODO_ACTIONS.DELETE_TODO_SUCCESS,
+      payload: { id },
+    });
+
+    invalidateCache();
+
+  } catch (error) {
+    dispatch({
+      type: TODO_ACTIONS.DELETE_TODO_ERROR,
+      payload: {
+        originalTodo,
+        message: error.message,
+      },
+    });
+  }
+};
+
+
   return (
     <div>
       {isTodoListLoading && (<p>Loading todos</p>)}
@@ -318,6 +358,7 @@ function TodosPage() {
           todoList={todoList}
           onCompleteTodo={completeTodo}
           onUpdateTodo={updateTodo}
+          onDeleteTodo = {deleteTodo}
           dataVersion={dataVersion}
           statusFilter={statusFilter}
           filterTerm={filterTerm}

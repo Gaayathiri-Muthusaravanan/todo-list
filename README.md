@@ -21,13 +21,13 @@ https://todo-list-kzgfmklww-gaayathiri-muthusaravanans-projects.vercel.app/login
 - CSS Modules
 - Vercel (deployment)
 
-### Screnshotss
+### Screnshots
 
 ### Desktop View
 ![Desktop Screenshot](./src/screenshots/desktop1.jpg) 
-![Desktop Screenshot](./src/screenshots//desktop2.jpg)
-![Desktop Screenshot](./src/screenshots//desktop3.jpg)
-![Desktop Screenshot](./src/screenshots//desktop4.jpg)
+![Desktop Screenshot](./src/screenshots/desktop2.jpg)
+![Desktop Screenshot](./src/screenshots/desktop3.jpg)
+![Desktop Screenshot](./src/screenshots/desktop4.jpg)
 
 
 ### Tablet view

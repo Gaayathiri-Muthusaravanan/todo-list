@@ -3,7 +3,8 @@ import styles from '../../../css/TodosPage.module.css'
 import TextInputWithLabel from "../../../shared/TextInputWithLabel";
 import { isValidTodoTitle } from "../../../utils/todoValidation";
 import { useEditableTitle } from "../../../hooks/useEditableTitle";
-function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
+import { sanitizeInput } from "../../../utils/sanitize";
+function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
 
     const {
         isEditing,
@@ -23,7 +24,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             return;
         }
         event.preventDefault();
-        const finalTitle = finishEdit();
+        const finalTitle = sanitizeInput(finishEdit());
         onUpdateTodo({ ...todo, title: finalTitle });
 
     }
@@ -33,15 +34,22 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
                 {isEditing ?
                     (<>
                         <div className={styles.todoInputGroup}>
-                        <TextInputWithLabel
-                            value={workingTitle}
-                            onChange={handleEdit}
-                            labelText="Todo"
-                            elementId={`editTitle${todo.id}`} />
-                            </div>
+                            <TextInputWithLabel
+                                value={workingTitle}
+                                onChange={handleEdit}
+                                labelText="Todo"
+                                elementId={`editTitle${todo.id}`} />
+                        </div>
                         <button type="button" className={styles.cancelButton} onClick={handleCancel}> Cancel </button>
                         <button type="button" className={styles.updateButton} onClick={handleUpdate} disabled={!isValidTodoTitle(workingTitle)}> Update </button>
-                        
+                        <button
+                            type="button"
+                            className={styles.deleteButton}
+
+                            onClick={() => onDeleteTodo(todo.id)}
+                        >
+                            Delete
+                        </button>
                     </>)
                     :
                     (<div className={styles.checkboxWrapper}>
@@ -54,6 +62,8 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
                             />
                         </label>
                         <span onClick={startEditing}>{todo.title}</span>
+
+
                     </div>
                     )
                 }

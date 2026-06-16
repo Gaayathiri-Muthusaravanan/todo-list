@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import TodoListItem from "./TodoListItem";
 
-function TodoList({ todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusFilter = 'all', filterTerm = '' }) {
+function TodoList({ todoList, onCompleteTodo, onUpdateTodo,onDeleteTodo, dataVersion, statusFilter = 'all', filterTerm = '' }) {
 
   const filteredTodoList = useMemo(() => {
 
@@ -55,6 +55,7 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusF
             todo={todo}
             onCompleteTodo={onCompleteTodo}
             onUpdateTodo={onUpdateTodo}
+            onDeleteTodo={onDeleteTodo}
           />
         )}
 

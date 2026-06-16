@@ -155,7 +155,25 @@
   accent-color: #2f6f9e;
   cursor: pointer;
 }
+.deleteButton {
+  background: #ef4444;
+  color: white;
 
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+  font-weight: 600;
+
+  margin-left: 10px;
+
+  transition: 0.2s ease;
+}
+
+.deleteButton:hover {
+  background: #dc2626;
+}
 /* todo text */
 .checkboxWrapper span {
   font-size: 1.1rem;

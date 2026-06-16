@@ -2,12 +2,14 @@ import { useRef, useState } from "react";
 import styles from '../../css/TodosPage.module.css';
 import TextInputWithLabel from "../../shared/TextInputWithLabel";
 import { isValidTodoTitle } from "../../utils/todoValidation";
+import { sanitizeInput } from "../../utils/sanitize";
 function TodoForm({ onAddTodo }) {
     const inputRef = useRef();
     const [workingTodoTitle, setWorkingTodoTitle] = useState("");
     const handleAddTodo = (event) => {
         event.preventDefault();
-        onAddTodo(workingTodoTitle);
+        const cleanTitle = sanitizeInput(workingTodoTitle);
+        onAddTodo(cleanTitle);
         setWorkingTodoTitle("");
 
         inputRef.current.focus();
