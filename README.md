@@ -21,7 +21,7 @@ https://todo-list-kzgfmklww-gaayathiri-muthusaravanans-projects.vercel.app/login
 - CSS Modules
 - Vercel (deployment)
 
-### Screnshots
+### Screenshots
 
 ### Desktop View
 ![Desktop Screenshot](./src/screenshots/desktop1.jpg) 
