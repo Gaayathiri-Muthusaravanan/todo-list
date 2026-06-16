@@ -1,50 +1,102 @@
+.todoContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto 40px;
+  padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  text-align: center;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* Controls */
+
 .controlsRow {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 12px;
   flex-wrap: wrap;
+  gap: 12px;
 
   width: 100%;
-
   padding: 12px 16px;
 
-  background-color: white;
+  background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
 
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
+.controlsRow > * {
+  flex: 1 1 200px;
+}
+
+/* Form */
+
 .todoFormWrapper {
-
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
   padding: 40px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
 }
 
-.addTodoButton {
-  margin-top: 20px;
-  width: 50%;
-}
+.todoInputGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-.controlsRow>* {
   flex: 1;
   min-width: 0;
 }
 
 
-.filterContainer {
+.addTodoButton {
+  width: auto;
+  margin-top: 12px;
+
+  padding: 8px 14px;
+  font-size: 14px;
+
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+  font-weight: 600;
+
+  background: #276139;
+  color: #fff;
+
+  transition: 0.2s ease;
+}
+
+/* Filters */
+
+.filterContainer,
+.sortContainer,
+.statusFilter {
   display: flex;
   align-items: center;
   gap: 10px;
 
   padding: 10px 12px;
-  background: #fff;
+
+  background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
 
   min-width: 0;
+
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .filterLabel {
@@ -58,130 +110,122 @@
   min-width: 0;
 }
 
-
-.sortContainer,
-.statusFilter {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 10px 12px;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 600;
-  min-width: 0;
-}
-
 .sortContainer select {
   width: 100%;
 }
 
-
-.todoContainer {
-  width: 100%;
-  max-width: 1200px;
-
-  margin: 20px auto 40px;
-  padding: 24px;
-
-  text-align: center;
-
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
+/* Todo List */
 
 .listTodo {
   list-style: none;
   width: 100%;
+
   margin: 15px auto;
   padding: 0;
 }
 
+.todoEditRow,
 .listTodo form {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 16px;
 
-  background: #fff;
+  width: 100%;
+
   padding: 18px;
-  border-radius: 12px;
 
+  background: #ffffff;
   border: 1px solid #e5e7eb;
+  border-radius: 12px;
 }
-
 
 .checkboxWrapper {
   display: flex;
   align-items: center;
   gap: 12px;
 
-
+  flex: 1;
 }
 
 .checkboxWrapper span {
   font-size: 1.1rem;
+  cursor: pointer;
 }
 
-
-.todoInput,
-.listTodo input[type="text"] {
-  flex: 1;
-  min-width: 0;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-}
-
-
-input:focus,
-select:focus {
-  border-color: #25eb53;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-}
-
+/* Buttons */
 
 .todoContainer button {
+  padding: 10px 16px;
+
   border: none;
   border-radius: 8px;
-  padding: 10px 16px;
+
   cursor: pointer;
   font-weight: 600;
+
+  transition: 0.2s ease;
 }
 
+.updateButton {
+  background: #2f6f9e;
+  color: white;
+}
+
+.updateButton:hover {
+  background: #3c5b93;
+}
+
+.cancelButton {
+  background: #a6322a;
+  color: white;
+}
+
+.cancelButton:hover {
+  background: #d32f2f;
+}
+
+/* Heading */
 
 .todoPara {
   font-size: 1.6rem;
   font-weight: 700;
 }
 
+/* Focus States */
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #25eb53;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Mobile */
 
 @media (max-width: 768px) {
-
   .controlsRow {
     flex-direction: column;
     align-items: stretch;
     margin-top: 60px;
   }
 
-  .controlsRow>* {
+  .controlsRow > * {
     width: 100%;
   }
 
+  .todoEditRow,
   .listTodo form {
     flex-direction: column;
     align-items: stretch;
   }
 
+  .actions {
+    justify-content: flex-end;
+  }
 
+  .addTodoButton {
+    width: 100%;
+  }
 }

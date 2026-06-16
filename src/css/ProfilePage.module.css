@@ -1,6 +1,4 @@
-/* =========================
-   PAGE CONTAINER
-========================= */
+
 .profilePage {
   max-width: 1000px;
   margin: 90px auto 40px;
@@ -9,9 +7,7 @@
   background: #f8fafc;
 }
 
-/* =========================
-   HEADER SECTION
-========================= */
+
 .profileHeader {
   background: linear-gradient(135deg, #e5f9f0, #efedf5, #d5e6f0);
   color: #1e293b;
@@ -50,9 +46,7 @@
   color: #62656a;
 }
 
-/* =========================
-   LOADING / ERROR TEXT
-========================= */
+
 .infoText,
 .errorText {
   text-align: center;
@@ -68,20 +62,16 @@
   color: #ef4444;
 }
 
-/* =========================
-   GRID CONTAINER
-========================= */
+
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 20px;
-
-  margin-top: 25px;
+  margin-bottom: 50px;
+  margin-top: 55px;
 }
 
-/* =========================
-   BASE CARD STYLE
-========================= */
+
 .cardTotal,
 .cardCompleted,
 .cardActive,
@@ -90,7 +80,7 @@
   border-radius: 18px;
 
   padding: 22px;
-  min-height: 180px;
+  min-height: 320px;
 
   display: flex;
   flex-direction: column;
@@ -109,19 +99,15 @@
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
 }
 
-/* =========================
-   ICON
-========================= */
+
 .icon {
   font-size: 3rem;
   margin-bottom: 10px;
 }
 
-/* =========================
-   TEXT
-========================= */
+
 .cardBase h2 {
-  font-size: 1rem;
+  font-size: .5rem;
   color: #7a7d82;
   margin-bottom: 8px;
   font-weight: 600;
@@ -129,14 +115,12 @@
 }
 
 .cardPara {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 800;
   color: #6f747e;
 }
 
-/* =========================
-   CARD VARIANTS
-========================= */
+
 .cardTotal {
   border-top: 5px solid #a5b4fc;
 }
@@ -153,9 +137,7 @@
   border-top: 5px solid #f9a8d4;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+
 @media (max-width: 768px) {
   .profilePage {
     margin-top: 70px;

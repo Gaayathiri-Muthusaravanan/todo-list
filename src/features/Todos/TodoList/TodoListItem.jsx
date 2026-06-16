@@ -29,16 +29,19 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     }
     return (
         <li className={styles.listTodo}>
-            <form onSubmit={handleUpdate}>
+            <form onSubmit={handleUpdate} className={styles.todoEditRow}>
                 {isEditing ?
                     (<>
+                        <div className={styles.todoInputGroup}>
                         <TextInputWithLabel
                             value={workingTitle}
                             onChange={handleEdit}
                             labelText="Todo"
                             elementId={`editTitle${todo.id}`} />
-                        <button type="button" id="cancelButton" onClick={handleCancel}> Cancel </button>
-                        <button type="button" id="updateButton" onClick={handleUpdate} disabled={!isValidTodoTitle(workingTitle)}> Update </button>
+                            </div>
+                        <button type="button" className={styles.cancelButton} onClick={handleCancel}> Cancel </button>
+                        <button type="button" className={styles.updateButton} onClick={handleUpdate} disabled={!isValidTodoTitle(workingTitle)}> Update </button>
+                        
                     </>)
                     :
                     (<div className={styles.checkboxWrapper}>

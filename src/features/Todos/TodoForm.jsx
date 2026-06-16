@@ -15,7 +15,7 @@ function TodoForm({ onAddTodo }) {
     };
 
     return (
-        <form onSubmit={handleAddTodo} className={styles.todoForm}>
+        <form onSubmit={handleAddTodo} >
             <TextInputWithLabel
                 elementId="todoTitle"
                 labelText="Todo"
