@@ -195,21 +195,21 @@
 }
 
 .updateButton {
-  background: #2f6f9e;
+  background: #237335;
   color: white;
 }
 
 .updateButton:hover {
-  background: #3c5b93;
+  background: #18612c;
 }
 
 .cancelButton {
-  background: #a6322a;
+  background: #2a76b0;
   color: white;
 }
 
 .cancelButton:hover {
-  background: #d32f2f;
+  background: #202a95;
 }
 
 /* Heading */
