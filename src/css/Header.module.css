@@ -1,6 +1,4 @@
-
-
-#appHeading {
+.appHeading {
   height: var(--header-height);
   width: 100%;
   background: #0f172a;
@@ -21,14 +19,14 @@
 }
 
 
-#titleSection {
+.titleSection {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
 
-#todoImage {
+.todoImage {
   width: 38px;
   height: 38px;
   object-fit: cover;
@@ -36,7 +34,7 @@
 }
 
 
-#headingText {
+.headingText {
   font-size: 22px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -44,7 +42,7 @@
 }
 
 
-#appHeading button {
+.appHeading button {
   background: #ef4444;
   color: white;
 
@@ -58,12 +56,12 @@
   transition: 0.2s ease;
 }
 
-#appHeading button:hover {
+.appHeading button:hover {
   background: #dc2626;
 }
 
 
-.nav-links {
+.navLinks {
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -73,7 +71,7 @@
   padding: 0;
 }
 
-.nav-links a {
+.navLinks a {
   color: white;
   text-decoration: none;
 
@@ -83,12 +81,12 @@
   transition: 0.2s ease;
 }
 
-.nav-links a:hover {
+.navLinks a:hover {
   color: #a78bfa;
 }
 
 
-.active-link {
+.activeLink {
   font-weight: 700;
   border-bottom: 2px solid white;
   padding-bottom: 2px;
@@ -97,7 +95,7 @@
 
 @media (max-width: 768px) {
 
-  #appHeading {
+  .appHeading {
     flex-direction: column;
     height: auto;
     padding: 12px;
@@ -105,38 +103,55 @@
     align-items: center;
   }
 
-  #titleSection {
+  .titleSection {
     justify-content: center;
   }
 
-  #headingText {
+  .headingText {
     font-size: 18px;
   }
 
-  #appHeading button {
+  .appHeading button {
     padding: 6px 10px;
     font-size: 14px;
   }
 
-  .nav-links {
+  .navLinks {
     width: 100%;
     justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
+    list-style: none;
+    display: flex;
+
+    padding: 0;
+    margin: 0;
   }
 
-  .nav-links a {
+  .navLinks a {
     font-size: 16px;
   }
 }
 
+.activeLink::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background: #a78bfa;
+  border-radius: 999px;
+}
 
 @media (max-width: 412px) {
-  #headingText {
+  .headingText {
     font-size: 16px;
   }
 
-  .nav-links {
+  .navLinks {
     gap: 0.8rem;
   }
 }

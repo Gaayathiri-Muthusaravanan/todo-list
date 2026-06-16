@@ -1,7 +1,4 @@
-
-
-
-.controls-row {
+.controlsRow {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -9,24 +6,35 @@
   flex-wrap: wrap;
 
   width: 100%;
-  margin-top: 80px;
+
   padding: 12px 16px;
 
-  background: rgba(255, 255, 255, 0.08);
+  background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
 
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
+.todoFormWrapper {
 
-.controls-row > * {
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  padding: 40px;
+}
+
+.addTodoButton {
+  margin-top: 20px;
+  width: 50%;
+}
+
+.controlsRow>* {
   flex: 1;
   min-width: 0;
 }
 
 
-.filter-container {
+.filterContainer {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -39,20 +47,20 @@
   min-width: 0;
 }
 
-.filter-label {
+.filterLabel {
   font-size: 16px;
   font-weight: 600;
   white-space: nowrap;
 }
 
-.filter-input {
+.filterInput {
   flex: 1;
-  min-width: 0;   
+  min-width: 0;
 }
 
 
-.sort-container,
-.status-filter {
+.sortContainer,
+.statusFilter {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -61,16 +69,17 @@
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
-
+  font-size: 15px;
+  font-weight: 600;
   min-width: 0;
 }
 
-.sort-container select {
+.sortContainer select {
   width: 100%;
 }
 
 
-.todo-container {
+.todoContainer {
   width: 100%;
   max-width: 1200px;
 
@@ -91,14 +100,14 @@
 }
 
 
-#listTodo {
+.listTodo {
   list-style: none;
   width: 100%;
   margin: 15px auto;
   padding: 0;
 }
 
-#listTodo form {
+.listTodo form {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -112,21 +121,21 @@
 }
 
 
-.checkbox-wrapper {
+.checkboxWrapper {
   display: flex;
   align-items: center;
   gap: 12px;
-  flex: 1;
-  min-width: 0;
+
+
 }
 
-.checkbox-wrapper span {
+.checkboxWrapper span {
   font-size: 1.1rem;
 }
 
 
 .todoInput,
-#listTodo input[type="text"] {
+.listTodo input[type="text"] {
   flex: 1;
   min-width: 0;
   padding: 12px 14px;
@@ -142,7 +151,7 @@ select:focus {
 }
 
 
-button {
+.todoContainer button {
   border: none;
   border-radius: 8px;
   padding: 10px 16px;
@@ -151,7 +160,7 @@ button {
 }
 
 
-#todoPara {
+.todoPara {
   font-size: 1.6rem;
   font-weight: 700;
 }
@@ -159,19 +168,20 @@ button {
 
 @media (max-width: 768px) {
 
-  .controls-row {
+  .controlsRow {
     flex-direction: column;
     align-items: stretch;
+    margin-top: 60px;
   }
 
-  .controls-row > * {
+  .controlsRow>* {
     width: 100%;
   }
 
-  #listTodo form {
+  .listTodo form {
     flex-direction: column;
     align-items: stretch;
   }
 
- 
+
 }

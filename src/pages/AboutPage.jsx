@@ -1,15 +1,14 @@
-import '../css/aboutPage.css'
 function AboutPage() {
   return (
-    <div id  = "aboutPageDiv">
-      <div id="aboutPageTitle">
-      <h1>About This Todo App</h1>
-      <p>
-        This application helps users manage tasks and stay organized.
-      </p>
+    <div className={styles.aboutPageDiv}>
+      <div className={styles.aboutPageTitle}>
+        <h1>About This Todo App</h1>
+        <p>
+          This application helps users manage tasks and stay organized.
+        </p>
       </div>
-      <div className="aboutFlex">
-        <section className="about-section">
+      <div className={styles.aboutFlex}>
+        <section className={styles.aboutSection}>
           <h2>Features</h2>
           <ul>
             <li>Create todos</li>
@@ -18,7 +17,7 @@ function AboutPage() {
             <li>Sort todos</li>
           </ul>
         </section>
-        <section className="about-section">
+        <section className={styles.aboutSection}>
           <h2>Technologies Used</h2>
           <ul>
             <li>React</li>
@@ -30,5 +29,4 @@ function AboutPage() {
     </div>
   );
 }
-
 export default AboutPage;

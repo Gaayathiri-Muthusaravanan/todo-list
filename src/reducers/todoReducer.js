@@ -1,31 +1,31 @@
 export const TODO_ACTIONS = {
   // Fetch operations
 
-    FETCH_START: 'FETCH_START',
-    FETCH_SUCCESS: 'FETCH_SUCCESS',
-    FETCH_ERROR: 'FETCH_ERROR',
-  
+  FETCH_START: 'FETCH_START',
+  FETCH_SUCCESS: 'FETCH_SUCCESS',
+  FETCH_ERROR: 'FETCH_ERROR',
+
   // Add todo operations
-    ADD_TODO_START: 'ADD_TODO_START',
-    ADD_TODO_SUCCESS: 'ADD_TODO_SUCCESS',
-    ADD_TODO_ERROR: 'ADD_TODO_ERROR',
- 
-    //COMPLTE TODO OPERATIONS
-    COMPLETE_TODO_START: 'COMPLETE_TODO_START',
-    COMPLETE_TODO_SUCCESS: 'COMPLETE_TODO_SUCCESS',
-    COMPLETE_TODO_ERROR: 'COMPLETE_TODO_ERROR',
+  ADD_TODO_START: 'ADD_TODO_START',
+  ADD_TODO_SUCCESS: 'ADD_TODO_SUCCESS',
+  ADD_TODO_ERROR: 'ADD_TODO_ERROR',
 
-    //UPDATE TODO OPERATIONS
-    UPDATE_TODO_START: 'UPDATE_TODO_START',
-    UPDATE_TODO_SUCCESS: 'UPDATE_TODO_SUCCESS',
-    UPDATE_TODO_ERROR: 'UPDATE_TODO_ERROR',
-    INVALIDATE_CACHE: 'INVALIDATE_CACHE',
-    SET_SORT: 'SET_SORT',
-    SET_FILTER: 'SET_FILTER', 
+  //COMPLTE TODO OPERATIONS
+  COMPLETE_TODO_START: 'COMPLETE_TODO_START',
+  COMPLETE_TODO_SUCCESS: 'COMPLETE_TODO_SUCCESS',
+  COMPLETE_TODO_ERROR: 'COMPLETE_TODO_ERROR',
 
-    CLEAR_ERROR:'CLEAR_ERROR', 
+  //UPDATE TODO OPERATIONS
+  UPDATE_TODO_START: 'UPDATE_TODO_START',
+  UPDATE_TODO_SUCCESS: 'UPDATE_TODO_SUCCESS',
+  UPDATE_TODO_ERROR: 'UPDATE_TODO_ERROR',
+  INVALIDATE_CACHE: 'INVALIDATE_CACHE',
+  SET_SORT: 'SET_SORT',
+  SET_FILTER: 'SET_FILTER',
 
-    RESET_FILTERS: 'RESET_FILTERS',
+  CLEAR_ERROR: 'CLEAR_ERROR',
+
+  RESET_FILTERS: 'RESET_FILTERS',
 
 };
 export const initialTodoState = {
@@ -39,7 +39,7 @@ export const initialTodoState = {
   dataVersion: 0,
 };
 export function todoReducer(state, action) {
-   
+
   switch (action.type) {
     // We'll add cases here
     case TODO_ACTIONS.FETCH_START:
@@ -62,8 +62,8 @@ export function todoReducer(state, action) {
         ...state,
         isTodoListLoading: false,
         error: action.payload.isFilterError ? ''
-      : action.payload.message,
-          
+          : action.payload.message,
+
       };
     case TODO_ACTIONS.ADD_TODO_START:
       return {
@@ -71,100 +71,100 @@ export function todoReducer(state, action) {
         todoList: [action.payload.tempTodo, ...state.todoList],
       };
     case TODO_ACTIONS.ADD_TODO_SUCCESS:
-     
+
       return {
         ...state,
-        todoList:  state.todoList.map(todo=>
-                        todo.id === action.payload.tempId ? 
-                        action.payload.savedTodo : todo
-                      )
-        
-      
+        todoList: state.todoList.map(todo =>
+          todo.id === action.payload.tempId ?
+            action.payload.savedTodo : todo
+        )
+
+
       };
     case TODO_ACTIONS.ADD_TODO_ERROR:
-      return{
+      return {
         ...state,
-        todoList: state.todoList.filter(todo=>
-                        todo.id !== action.payload.tempId 
+        todoList: state.todoList.filter(todo =>
+          todo.id !== action.payload.tempId
         ),
-        error:action.payload.message,
-                    }
-                    
+        error: action.payload.message,
+      }
+
     case TODO_ACTIONS.COMPLETE_TODO_START:
       return {
         ...state,
         todoList: state.todoList.map(todo =>
-          todo.id === action.payload.id ? 
-          { ...todo, isCompleted: true }
-          : 
-          todo)
+          todo.id === action.payload.id ?
+            { ...todo, isCompleted: true }
+            :
+            todo)
       }
     case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
       return {
         ...state,
       };
     case TODO_ACTIONS.COMPLETE_TODO_ERROR:
-      return{
+      return {
         ...state,
-        todoList:state.todoList.map(todo=>
-            todo.id === action.payload.originalTodo.id
-  ? action.payload.originalTodo
-  : todo
-        
+        todoList: state.todoList.map(todo =>
+          todo.id === action.payload.originalTodo.id
+            ? action.payload.originalTodo
+            : todo
+
         ),
         error: action.payload.message,
       }
     case TODO_ACTIONS.UPDATE_TODO_START:
-      return{
+      return {
         ...state,
-        todoList: state.todoList.map((todo)=>
+        todoList: state.todoList.map((todo) =>
           todo.id === action.payload.editedTodo.id ? action.payload.editedTodo : todo),
       }
 
     case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
-      return{
+      return {
         ...state
       }
     case TODO_ACTIONS.UPDATE_TODO_ERROR:
-      return{
+      return {
         ...state,
-        todoList:state.todoList.map((todo)=>
-                todo.id === action.payload.originalTodo.id ? 
-                action.payload.originalTodo : todo),
+        todoList: state.todoList.map((todo) =>
+          todo.id === action.payload.originalTodo.id ?
+            action.payload.originalTodo : todo),
         error: action.payload.message,
-    }
-      
+      }
+
     case TODO_ACTIONS.SET_SORT:
       return {
         ...state,
         sortBy: action.payload.sortBy,
         sortDirection: action.payload.sortDirection,
       };
-      case TODO_ACTIONS.SET_FILTER:
-  return {
-    ...state,
-    filterTerm: action.payload.filterTerm,
-  };
-case TODO_ACTIONS.CLEAR_ERROR:
-  return {
-    ...state,
-    error: '',
-    filterError: '',
-  };
-case TODO_ACTIONS.RESET_FILTERS:
-  return {
-    ...state,
-    filterTerm: '',
-    filterError: '',
-    sortBy: 'createdAt',
-    sortDirection: 'asc',
-  };
-  case TODO_ACTIONS.INVALIDATE_CACHE:
-  return {
-    ...state,
-    dataVersion: state.dataVersion + 1,
-  };
-      
+    case TODO_ACTIONS.SET_FILTER:
+      return {
+        ...state,
+        filterTerm: action.payload.filterTerm,
+      };
+    case TODO_ACTIONS.CLEAR_ERROR:
+      return {
+        ...state,
+        error: '',
+        filterError: '',
+      };
+    case TODO_ACTIONS.RESET_FILTERS:
+      return {
+        ...state,
+        filterTerm: '',
+        filterError: '',
+        sortBy: 'createdAt',
+        sortDirection: 'asc',
+      };
+    case TODO_ACTIONS.INVALIDATE_CACHE:
+      return {
+        ...state,
+        dataVersion: state.dataVersion + 1,
+      };
+
     default:
       throw new Error(`Unknown action type: ${action.type}`);
   }

@@ -15,11 +15,11 @@ function StatusFilter() {
   };
 
   return (
-    <div className="status-filter">
+    <div className={StyleSheet.statusFilter}>
       <label htmlFor='statusFilter'>Show:</label>
       <select
         id='statusFilter'
-        
+
         value={currentStatus}
         onChange={(e) => handleStatusChange(e.target.value)}
       >

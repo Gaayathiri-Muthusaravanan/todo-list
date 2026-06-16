@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import TodoListItem from "./TodoListItem";
 
-function TodoList({todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusFilter = 'all',filterTerm=''}){
-   
-    const filteredTodoList = useMemo(()=>{
-         
+function TodoList({ todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusFilter = 'all', filterTerm = '' }) {
+
+  const filteredTodoList = useMemo(() => {
+
 
     let filteredTodos;
     switch (statusFilter) {
@@ -14,25 +14,25 @@ function TodoList({todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusFi
       case 'active':
         filteredTodos = todoList.filter((todo) => !todo.isCompleted);
         break;
-      case 'all':
+        c
       default:
         filteredTodos = todoList;
         break;
     }
-          if (filterTerm.trim() !== '') {
-    filteredTodos = filteredTodos.filter((todo) =>
-      todo.title.toLowerCase().includes(filterTerm.toLowerCase())
-    );
-  }
-        return {
-            version: dataVersion,
-            todos: filteredTodos,
-        };
-    },[dataVersion, todoList,statusFilter,filterTerm]);
-     const getEmptyMessage = () => {
-      if (filterTerm.trim() !== '') {
-    return 'No todos match your search.';
-  }
+    if (filterTerm.trim() !== '') {
+      filteredTodos = filteredTodos.filter((todo) =>
+        todo.title.toLowerCase().includes(filterTerm.toLowerCase())
+      );
+    }
+    return {
+      version: dataVersion,
+      todos: filteredTodos,
+    };
+  }, [dataVersion, todoList, statusFilter, filterTerm]);
+  const getEmptyMessage = () => {
+    if (filterTerm.trim() !== '') {
+      return 'No todos match your search.';
+    }
 
     switch (statusFilter) {
       case 'completed':
@@ -45,20 +45,20 @@ function TodoList({todoList, onCompleteTodo, onUpdateTodo, dataVersion, statusFi
     }
   };
 
-    return(
-        filteredTodoList.todos.length === 0 ? 
-             <p>{getEmptyMessage()}</p> :
-            (<ul>
-                { filteredTodoList.todos.map(todo=>
-                    <TodoListItem 
-                        key = {todo.id} 
-                        todo = {todo} 
-                        onCompleteTodo = {onCompleteTodo}
-                        onUpdateTodo={onUpdateTodo}
-                    />
-                )}
-                
-                 </ul>)
-    );
+  return (
+    filteredTodoList.todos.length === 0 ?
+      <p>{getEmptyMessage()}</p> :
+      (<ul>
+        {filteredTodoList.todos.map(todo =>
+          <TodoListItem
+            key={todo.id}
+            todo={todo}
+            onCompleteTodo={onCompleteTodo}
+            onUpdateTodo={onUpdateTodo}
+          />
+        )}
+
+      </ul>)
+  );
 }
 export default TodoList;
