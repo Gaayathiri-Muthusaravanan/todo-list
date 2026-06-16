@@ -15,7 +15,7 @@ function StatusFilter() {
   };
 
   return (
-    <div className={StyleSheet.statusFilter}>
+    <div className={styles.statusFilter}>
       <label htmlFor='statusFilter'>Show:</label>
       <select
         id='statusFilter'
