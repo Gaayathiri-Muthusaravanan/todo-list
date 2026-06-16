@@ -11,12 +11,9 @@ After any prompts, install the project dependencies using NPM: npm install
 npm run dev
 
 Then open your browser and go to : http://localhost:5173
-# 📝 Todo List App
-
-
 
 ## Live Demo
-https://todo-list-nu9w1a8fc-gaayathiri-muthusaravanans-projects.vercel.app
+https://todo-list-kzgfmklww-gaayathiri-muthusaravanans-projects.vercel.app/login
 
 
 
@@ -37,7 +34,47 @@ https://todo-list-nu9w1a8fc-gaayathiri-muthusaravanans-projects.vercel.app
 - CSS Modules
 - Vercel (deployment)
 
+##Screnshotss
+
+### Desktop View
+![Desktop Screenshot](./src/screenshots/desktop1.jpg) 
+![Desktop Screenshot](./src/screenshots//desktop2.jpg)
+![Desktop Screenshot](./src/screenshots//desktop3.jpg)
+![Desktop Screenshot](./src/screenshots//desktop4.jpg)
 
 
+### Tablet view
+![Tablet Screenshot](./src/screenshots/tab1.jpg)
+![Tablet Screenshot](./src/screenshots/tab2.jpg)
+![Tablet Screenshot](./src/screenshots/tab3.jpg)
 
+### Mobile View
+![Mobile Screenshot](./src/screenshots/mobile1.jpg)
+![Mobile Screenshot](./src/screenshots/mobile2.jpg)
+![Mobile Screenshot](./src/screenshots/mobile3.jpg)
+
+---
+
+## Design Decisions
+
+I chose **CSS Modules** for styling because it helps keep styles scoped to individual components. This prevents class name conflicts and makes the code more maintainable and scalable.
+
+The UI is designed with a clean and minimal layout to improve usability and focus on task management. Flexbox and CSS Grid are used for responsive layouts.
+
+---
+
+## Future Improvements
+
+- Add backend database 
+- Add dark mode / theme switcher
+- Add due dates and reminders
+
+---
+
+## 🔒 Security Features
+
+- Input sanitization using DOMPurify
+- Form validation before submission
+
+---
 
